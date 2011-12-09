@@ -1,0 +1,2 @@
+This provides a set of tests - written as Cucubmer Features - for Gradle. These tests
+are focused on exploring the dependency resolution behaviour of Gradle.
