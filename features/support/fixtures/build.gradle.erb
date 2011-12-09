@@ -7,14 +7,14 @@ repositories {
   }
 }
 
-group = 'net.twasink'
+group = 'net.twasink.<%=group%>'
 sourceCompatibility = 1.6
 version = '<%= version%>'
 
 dependencies {
 <%
   dependencies.each() { | dep |
-%>  compile group: 'net.twasink', name: '<%=dep[:name].downcase%>', version: '<%=dep[:version]%>'
+%>  compile group: 'net.twasink.<%=group%>', name: '<%=dep[:name].downcase%>', version: '<%=dep[:version]%>'
 <%}%>
 }
 
