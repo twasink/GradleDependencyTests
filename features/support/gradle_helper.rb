@@ -68,6 +68,7 @@ module Twasink
       FileUtils.mkpath(File.join(@project_dir, 'build'))
 
       _create_gradle_files
+      _create_maven_files
       _create_java_file
     end
 
@@ -95,6 +96,10 @@ module Twasink
       _write_template @project_dir, 'settings.gradle'
     end
 
+    def _create_maven_files
+      _write_template @project_dir, 'pom.xml'
+    end
+
     def _create_java_file
 
       package_dir = File.join(@project_dir, 'src', 'main', 'java', 'net', 'twasink', @name.downcase)
@@ -105,7 +110,7 @@ module Twasink
     end
 
     def _perform_gradle_task(task)
-      commands = ["GRADLE_HOME=#{File.absolute_path('gradle')}",
+      commands = ["GRADLE_HOME=#{File.absolute_path('gradle_build')}",
                   "pushd #{@project_dir} > /dev/null",
                   "$GRADLE_HOME/bin/gradle -q #{task} 2>&1",
                   "popd > /dev/null"
