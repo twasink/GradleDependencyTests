@@ -9,4 +9,22 @@ group = 'net.twasink'
 sourceCompatibility = 1.6
 version = '<%= version%>'
 
-println ">>>> PROJECT GROUPID = ${project.group}"
+dependencies {
+<%
+  dependencies.each() { | dep |
+%>  compile group: 'net.twasink', name: '<%=dep[:name].downcase%>', version: '<%=dep[:version]%>'
+<%}%>
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "file://<%=File.absolute_path(working_dir)%>/repo")
+        }
+    }
+}
+
+
+task compiledeps(type:DependencyReportTask) {
+    configurations = [ project.configurations.getByName('compile') ] as Set
+}
