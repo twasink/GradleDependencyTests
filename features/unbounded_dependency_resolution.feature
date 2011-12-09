@@ -5,19 +5,17 @@ Feature: Unbounded Dependency Resolution
     And "Frodo" "1.0" depends on "Samwise" "1.0"
     Then the build for "Frodo" "1.0" will include "Samwise" "1.0"
 
-  @wip
   Scenario: Multiple choices, simple resolution of older dependency
     Given "Samwise" "1.0" exists
     And "Samwise" "1.1" exists
     And "Frodo" "1.0" depends on "Samwise" "1.0"
     Then the build for "Frodo" "1.0" will include "Samwise" "1.0"
 
-  @wip
   Scenario: Multiple choices, simple resolution of newer dependency
     Given "Samwise" "1.0" exists
     And "Samwise" "1.1" exists
     And "Frodo" "1.0" depends on "Samwise" "1.0"
-    Then the build for "Frodo" "1.0" will include "Samwise" "1.1"
+    Then the build for "Frodo" "1.0" will include "Samwise" "1.0"
 
   @wip
   Scenario: Transitive dependencies, single chain

@@ -16,5 +16,5 @@ end
 Then /^the build for "([^"]*)" "([^"]*)" will include "([^"]*)" "([^"]*)"$/ do | project, version, dependency, dependency_version |
   build_all_projects_except(project: project)
 
-  dependencies_for(project: project, version: version).should include([project: dependency, version: dependency_version])
+  dependencies_for(project: project, version: version).should include([name: dependency, version: dependency_version])
 end

@@ -49,6 +49,7 @@ module Twasink
 
     def add_dependency(args)
       puts "adding to project #{key} - #{args}"
+      dependencies << [name: args[:project], version: args[:version]]
     end
 
     def build
