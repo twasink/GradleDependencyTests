@@ -23,7 +23,7 @@ module Twasink
         @projects[project.key] = project
       end
       
-      return @projects[project.key]
+      return @projects[Project.key(args)]
     end
 
     def build_all_projects_except(args)
