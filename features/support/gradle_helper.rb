@@ -9,12 +9,10 @@ module Twasink
 
     def start_scenario(name)
       @working_dir = File.join("projects", name.downcase.gsub(/[ ,]/, '_'))
-      puts "working dir = #{@working_dir}"
     end
 
     def create_project(args)
       project = Project.new(working_dir: @working_dir, name: args[:project], version: args[:version])
-      puts "project key = #{project.key}"
 
       @projects[project.key] = project
     end
@@ -48,13 +46,42 @@ module Twasink
     end
 
     def add_dependency(args)
-      puts "adding to project #{key} - #{args}"
       dependencies << [name: args[:project], version: args[:version]]
     end
 
     def build
-      puts "building this project - #{key}"
+      @project_dir = File.join(@working_dir, "#{@name}_#{@version}")
+      if (File.exists? @project_dir)
+        FileUtils.rmtree(@project_dir)
+      end
+      FileUtils.mkpath(@project_dir)
+
+      _create_gradle_files
+      _create_java_file
+      _gradle_build
     end
 
+    def _write_template(path, filename)
+      template = ERB.new(IO.read(File.join(File.dirname(__FILE__), 'fixtures', "#{filename}.erb")))
+      IO.write(File.join(path, filename), template.result(binding))
+    end
+
+    def _create_gradle_files
+      _write_template @project_dir, 'build.gradle'
+      _write_template @project_dir, 'settings.gradle'
+    end
+
+    def _create_java_file
+
+      package_dir = File.join(@project_dir, 'src', 'main', 'java', 'net', 'twasink', @name.downcase)
+      FileUtils.mkpath(package_dir)
+
+      _write_template package_dir, 'Hello.java'
+
+    end
+
+    def _gradle_build
+      
+    end
   end
 end

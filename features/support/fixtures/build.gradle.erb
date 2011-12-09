@@ -1,0 +1,12 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+repositories {
+    mavenLocal()
+}
+
+group = 'net.twasink'
+sourceCompatibility = 1.6
+version = '<%= version%>'
+
+println ">>>> PROJECT GROUPID = ${project.group}"
