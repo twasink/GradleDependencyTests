@@ -63,6 +63,7 @@ Feature: Unbounded Dependency Resolution
 
   Scenario: Transitive dependencies, diamond structure, mismatched versions
     Given "Samwise" "1.0" exists
+    And "Samwise" "1.1" exists
     And "Frodo" "1.0" depends on "Samwise" "1.0"
     And "Aragon" "1.0" depends on "Samwise" "1.1"
     And "Gandalf" "1.0" depends on "Frodo" "1.0"
@@ -71,6 +72,7 @@ Feature: Unbounded Dependency Resolution
 
   Scenario: Transitive dependencies, diamond structure, older version at top
     Given "Samwise" "1.0" exists
+    And "Samwise" "1.1" exists
     And "Frodo" "1.0" depends on "Samwise" "1.0"
     And "Aragon" "1.0" depends on "Samwise" "1.1"
     And "Gandalf" "1.0" depends on "Samwise" "1.0"
@@ -80,6 +82,8 @@ Feature: Unbounded Dependency Resolution
 
   Scenario: Transitive dependencies, diamond structure, newer version at top
     Given "Samwise" "1.0" exists
+    And "Samwise" "1.1" exists
+    And "Samwise" "1.0" exists
     And "Frodo" "1.0" depends on "Samwise" "1.0"
     And "Aragon" "1.0" depends on "Samwise" "1.0"
     And "Gandalf" "1.0" depends on "Samwise" "1.1"

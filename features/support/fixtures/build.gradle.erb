@@ -2,7 +2,9 @@ apply plugin: 'java'
 apply plugin: 'maven'
 
 repositories {
-    mavenLocal()
+  maven {
+    url "file://<%=File.absolute_path(working_dir)%>/repo"
+  }
 }
 
 group = 'net.twasink'
