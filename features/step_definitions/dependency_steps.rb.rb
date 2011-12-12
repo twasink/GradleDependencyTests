@@ -13,6 +13,10 @@ Given /^"([^"]*)" "([^"]*)" depends on "([^"]*)" "([^"]*)"$/ do | project, versi
   create_project(name: project, version: version).add_dependency(name: dependency, version: dependency_version)
 end
 
+Given /^"([^"]*)" "([^"]*)" forcibly relies on "([^"]*)" "([^"]*)"$/ do | project, version, dependency, dependency_version |
+  create_project(name: project, version: version).add_forced_dependency(name: dependency, version: dependency_version)
+end
+
 Then /^the gradle build for "([^"]*)" "([^"]*)" will include "([^"]*)" "([^"]*)"$/ do | project, version, dependency, dependency_version |
   build_all_projects_except(project: project)
 

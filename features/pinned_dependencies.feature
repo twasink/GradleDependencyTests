@@ -50,5 +50,5 @@ Feature: Pinned Dependency Resolution
     And "Gandalf" "1.0" depends on "Frodo" "1.0"
     And "Gandalf" "1.0" depends on "Aragon" "1.0"
     And "Elrond" "1.0" depends on "Gandalf" "1.0"
-    Then the maven build for "Gandalf" "1.0" will include "Samwise" "1.0"
-    And the gradle build for "Gandalf" "1.0" will include "Samwise" "1.0"
+    Then the maven build for "Elrond" "1.0" will include "Samwise" "1.0"
+    And the gradle build for "Elrond" "1.0" will include "Samwise" "1.0"

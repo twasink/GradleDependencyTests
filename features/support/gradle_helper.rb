@@ -57,13 +57,14 @@ module Twasink
   end
 
   class Project
-    attr_reader :working_dir, :group, :name, :version, :dependencies
+    attr_reader :working_dir, :group, :name, :version, :dependencies, :forced_dependencies
 
     def initialize args
       args.each do |k, v|
         instance_variable_set("@#{k}", v) unless v.nil?
       end
       @dependencies = Array.new
+      @forced_dependencies = Array.new
     end
 
     def key
@@ -76,6 +77,10 @@ module Twasink
 
     def add_dependency(args)
       dependencies << { name: args[:name], version: args[:version] }
+    end
+
+    def add_forced_dependency(args)
+      forced_dependencies << { name: args[:name], version: args[:version] }
     end
 
     def _init_project

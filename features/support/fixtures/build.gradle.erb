@@ -18,6 +18,16 @@ dependencies {
 <%}%>
 }
 
+configurations.all {
+  resolutionStrategy {
+<%
+  forced_dependencies.each() { |dep |
+%>
+    force 'net.twasink.<%=group%>:<%=dep[:name].downcase%>:<%=dep[:version]%>'
+<%}%>
+  }
+}
+
 uploadArchives {
     repositories {
         mavenDeployer {
