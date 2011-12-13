@@ -41,7 +41,7 @@ Feature: Ivy Forced Dependency Resolution
 
   Scenario: Ivy Forced Dependencies in diamond structure with an resolvable conflict
     Given "Frodo" "1.0" forcibly relies on "Samwise" "[1.0]"
-    And "Aragon" "1.0" forcibly relies on "Samwise" "1.1"
+    And "Aragon" "1.0" depends on "Samwise" "1.1"
     And "Gandalf" "1.0" depends on "Frodo" "1.0"
     And "Gandalf" "1.0" depends on "Aragon" "1.0"
     Then the ivy build for "Gandalf" "1.0" will include "Samwise" "1.0"

@@ -6,7 +6,7 @@
         <dependency org="net.twasink.<%=group%>" name="<%=dep[:name].downcase%>" rev="<%=dep[:version]%>"/>
 <%}%>
 <% forced_dependencies.each() { | dep |%>
-        <dependency org="net.twasink.<%=group%>" name="<%=dep[:name].downcase%>" rev="<%=dep[:version]%>" force="true"/>
+        <dependency org="net.twasink.<%=group%>" name="<%=dep[:name].downcase%>" rev="<%=dep[:version]%>" revConstraint="<%=dep[:version]%>" force="true"/>
 <%}%>
     </dependencies>
 
