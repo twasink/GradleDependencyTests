@@ -2,9 +2,16 @@ apply plugin: 'java'
 apply plugin: 'maven'
 
 repositories {
+<% if using_maven? %>
   maven {
     url "file://<%=File.absolute_path(working_dir)%>/repo"
   }
+<% end %>
+<% if using_ivy? %>
+  ivy {
+    url "file://<%=File.absolute_path(working_dir)%>/ivy_repo"
+  }
+<% end %>
 }
 
 group = 'net.twasink.<%=group%>'
@@ -32,6 +39,9 @@ uploadArchives {
     repositories {
         mavenDeployer {
             repository(url: "file://<%=File.absolute_path(working_dir)%>/repo")
+        }
+        ivy {
+          url "file://<%=File.absolute_path(working_dir)%>/ivy_repo"
         }
     }
 }

@@ -1,0 +1,36 @@
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="<%=name%>" default="dist" basedir=".">
+  <target name="clean">
+    <delete dir="ant_build" />
+  </target>
+
+  <target name="init">
+    <mkdir dir="ant_build" />
+    <ivy:settings file="ant_ivysettings.xml" />
+    <ivy:resolve file="ant_ivy.xml" />
+  </target>
+
+  <target name="compile" depends="init,resolve">
+    <mkdir dir="ant_build/classes" />
+    <javac srcdir="src/main/java" destdir="ant_build/classes" />
+  </target>
+
+  <target name="dist" depends="compile">
+    <mkdir dir="ant_build/artifacts" />
+    <jar jarfile="ant_build/artifacts/jars/<%=name.downcase%>.jar" basedir="ant_build/classes" />
+  </target>
+
+  <target name="publish" depends="init">
+    <ivy:publish resolver="internal" pubrevision="<%=version%>" overwrite="true">
+       <artifacts pattern="ant_build/artifacts/jars/[artifact].[ext]" />
+    </ivy:publish>
+  </target>
+  <target name="resolve" depends="init" description="--> retrieve dependencies with ivy">
+    <ivy:cleancache />
+    <ivy:retrieve />
+  </target>
+  
+  <target name="compiledeps" depends="resolve">
+    <ivy:report conf="default" todir="ant_build/reports" xml="true" dot="true" />
+  </target>
+  
+</project>

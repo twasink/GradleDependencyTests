@@ -1,0 +1,10 @@
+<ivysettings>
+  <property name="work_dir" value="<%=File.absolute_path(working_dir)%>" />
+  <settings defaultCache="${work_dir}/ant_ivy_cache" defaultResolver="internal" checkUpToDate="false" />
+  <resolvers>
+    <filesystem name="internal">
+      <ivy pattern="${work_dir}/ant_ivy_repo/[organisation]/[module]/[revision]/ivy-[revision].xml" />
+      <artifact pattern="${work_dir}/ant_ivy_repo/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
+    </filesystem>
+  </resolvers>
+</ivysettings>
